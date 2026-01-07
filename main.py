@@ -9,8 +9,8 @@ os.chdir(PROJECT_DIR)
 steps = [
     ("Encryption", "Encryption.py"),
     ("Extract Frames", "extract_frames.py"),
-    ("Embed Message", "embed_msg.py"),
-    ("Extract Message", "extract_modified_frames.py"),
+    ("Embed Message", "embed_msg_adaptive.py"),
+    ("Extract Message", "extract_modified_frames_adaptive.py"),
     ("Decryption", "Decryption.py")
 ]
 

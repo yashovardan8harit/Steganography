@@ -4,6 +4,7 @@ import time
 import numpy as np
 from skimage.metrics import peak_signal_noise_ratio, structural_similarity
 from skimage.measure import shannon_entropy
+import json
 
 PROJECT_DIR = r"D:\Steganography"
 ORIGINAL_FRAMES_DIR = os.path.join(PROJECT_DIR, "output_frames")
@@ -98,8 +99,13 @@ def main():
     start = time.time()
 
     metrics = evaluate_video_quality()
+    metrics = {k: float(v) if hasattr(v, "item") else v for k, v in metrics.items()}
 
     elapsed = time.time() - start
+
+    results_path = os.path.join(PROJECT_DIR, "last_metrics.json")
+    with open(results_path, "w") as f:
+        json.dump(metrics, f, indent=2)
 
     print("\n📊 ===== STEGANOGRAPHIC QUALITY REPORT =====")
     print(f"🔹 Modified Frames:     {metrics['modified_frames']}")

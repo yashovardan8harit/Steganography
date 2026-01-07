@@ -30,7 +30,7 @@ def load_plaintext():
     if os.path.exists(PLAINTEXT_FILE):
         with open(PLAINTEXT_FILE, "rb") as f:
             return f.read()
-    return b"This is a test message hidden in the video." * 10000000
+    return b"Hello World! This is a test message. " * 100
 
 def encrypt():
     plaintext = load_plaintext()

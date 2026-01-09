@@ -6,13 +6,14 @@ import shutil
 PROJECT_DIR = r"D:\Steganography"
 STEGO_DIR = os.path.join(PROJECT_DIR, "output_frames_with_message")
 
+
 os.chdir(PROJECT_DIR)
 
 steps = [
     ("Encryption", "Encryption.py"),
     ("Extract Frames", "extract_frames.py"),
-    ("Embed Message", "embed_msg_adaptive.py"),
-    ("Extract Message", "extract_modified_frames_adaptive.py"),
+    ("Embed Message", "embed_msg.py"),
+    ("Extract Message", "extract_modified_frames.py"),
     ("Decryption", "Decryption.py")
 ]
 

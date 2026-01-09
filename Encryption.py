@@ -30,12 +30,11 @@ def load_plaintext():
     if os.path.exists(PLAINTEXT_FILE):
         with open(PLAINTEXT_FILE, "rb") as f:
             return f.read()
-    return b"Hello World! This is a test message. " * 100
+    return b"Hello World!"
 
 def encrypt():
     plaintext = load_plaintext()
     compressed = zlib.compress(plaintext)
-    rs_encoded = rsc.encode(compressed)
 
     passphrase = get_passphrase()
     salt = get_random_bytes(SALT_LEN)
@@ -43,9 +42,11 @@ def encrypt():
 
     nonce = get_random_bytes(NONCE_LEN)
     cipher = AES.new(key, AES.MODE_GCM, nonce=nonce)
-    ciphertext, tag = cipher.encrypt_and_digest(rs_encoded)
+    ciphertext, tag = cipher.encrypt_and_digest(compressed)
 
-    payload = salt + nonce + tag + ciphertext
+    rs_ciphertext = rsc.encode(ciphertext)
+
+    payload = salt + nonce + tag + rs_ciphertext
     payload = len(payload).to_bytes(4, "big") + payload
 
     with open(ENCRYPTED_BIN, "wb") as f:

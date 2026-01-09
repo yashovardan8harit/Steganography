@@ -31,18 +31,18 @@ with open(PAYLOAD_FILE, "rb") as f:
 salt = payload[:SALT_LEN]
 nonce = payload[SALT_LEN:SALT_LEN + NONCE_LEN]
 tag = payload[SALT_LEN + NONCE_LEN:SALT_LEN + NONCE_LEN + TAG_LEN]
-ciphertext = payload[SALT_LEN + NONCE_LEN + TAG_LEN:]
+rs_ciphertext = payload[SALT_LEN + NONCE_LEN + TAG_LEN:]
+
+decoded = rsc.decode(rs_ciphertext)
+if isinstance(decoded, tuple):
+    decoded = decoded[0]
 
 key = scrypt(get_passphrase(), salt, KEY_LEN, N=1 << N_LOG2, r=R, p=P)
 
 cipher = AES.new(key, AES.MODE_GCM, nonce=nonce)
-rs_encoded = cipher.decrypt_and_verify(ciphertext, tag)
+compressed = cipher.decrypt_and_verify(decoded, tag)
 
-decoded = rsc.decode(rs_encoded)
-if isinstance(decoded, tuple):
-    decoded = decoded[0]
-
-plaintext = zlib.decompress(decoded)
+plaintext = zlib.decompress(compressed)
 
 with open(OUTPUT_FILE, "wb") as f:
     f.write(plaintext)

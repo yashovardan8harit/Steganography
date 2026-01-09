@@ -2,10 +2,12 @@ import os
 import json
 import subprocess
 import matplotlib.pyplot as plt
+import shutil
 
 PROJECT_DIR = r"D:\Steganography"
 MESSAGE_FILE = os.path.join(PROJECT_DIR, "message.txt")
 RESULTS_FILE = os.path.join(PROJECT_DIR, "all_results.json")
+STEGO_DIR = os.path.join(PROJECT_DIR, "output_frames_with_message")
 
 base_message = "HELLO WORLD! This is a test message. "
 multipliers = [10, 100, 1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000, 11000, 12000, 13000, 14000, 15000]
@@ -27,6 +29,9 @@ for m in multipliers:
 
     metrics["payload_size"] = len(msg)
     all_results.append(metrics)
+
+    if os.path.exists(STEGO_DIR):
+        shutil.rmtree(STEGO_DIR)
 
 with open(RESULTS_FILE, "w") as f:
     json.dump(all_results, f, indent=2)

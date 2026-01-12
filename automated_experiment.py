@@ -10,8 +10,8 @@ RESULTS_FILE = os.path.join(PROJECT_DIR, "all_results.json")
 STEGO_DIR = os.path.join(PROJECT_DIR, "output_frames_with_message")
 
 base_message = "HELLO WORLD! This is a test message. "
-multipliers = [10, 100, 1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000, 11000, 12000, 13000, 14000, 15000]
-
+multipliers = [10, 100, 1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000, 11000, 12000, 13000, 14000, 15000, 16000, 17000, 18000, 19000, 20000, 25000, 30000, 35000, 40000, 45000, 50000, 60000, 70000, 80000, 90000, 100000]
+    
 all_results = []
 
 for m in multipliers:

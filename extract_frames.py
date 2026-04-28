@@ -2,7 +2,7 @@ import cv2
 import os
 
 PROJECT_DIR = r"D:\Steganography"
-VIDEO_PATH = os.path.join(PROJECT_DIR, "Bali.MOV")
+VIDEO_PATH = os.path.join(PROJECT_DIR, "bus.mp4")
 OUTPUT_DIR = os.path.join(PROJECT_DIR, "output_frames")
 
 os.makedirs(OUTPUT_DIR, exist_ok=True)
